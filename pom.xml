@@ -27,11 +27,12 @@
 			<artifactId>batik-swing</artifactId>
 			<version>1.6-1</version>
 		</dependency>
-	 <dependency>
-	  <groupId>org.jdesktop</groupId>
-	  <artifactId>beansbinding</artifactId>
-	  <version>1.2.1</version>
-	 </dependency>
+		
+		<dependency>
+			<groupId>org.jdesktop</groupId>
+			<artifactId>beansbinding</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

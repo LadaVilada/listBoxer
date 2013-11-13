@@ -5,6 +5,10 @@
  */
 package com.mycompany.listBoxer.dto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author vbobina
@@ -20,8 +24,14 @@ public enum RangeType {
         this.key = key;
     }
 
-    public String getKey() {
-        return this.key;
+    public static List<String> getStringValue() {
+    	List<String> result = new ArrayList<String>();
+        List<RangeType> rangeTypeList = Arrays.asList(RangeType.values());
+        for (RangeType type : rangeTypeList)
+        {
+        	result.add(type.key);
+        }
+        return result;
     }
 
     public RangeType getByRange(String key) {
@@ -29,5 +39,25 @@ public enum RangeType {
         return RangeType.valueOf(key);
 
     }
+    
+    public static RangeType fromKey(String rangeTypeKey)
+    {
+        RangeType[] enums = RangeType.values();
 
+        for (RangeType item : enums)
+        {
+            if (rangeTypeKey != null && item.getKey().equals(rangeTypeKey))
+            {
+                return item;
+            }
+        }
+
+        throw new IllegalArgumentException(String.format("Unknown cssClassName %s", RangeType.class));
+    }
+    
+    public String getKey()
+    {
+    	return key;
+    }
+    
 }
