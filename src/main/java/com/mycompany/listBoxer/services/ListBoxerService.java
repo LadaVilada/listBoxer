@@ -5,22 +5,24 @@
  */
 package com.mycompany.listBoxer.services;
 
-import com.mycompany.listBoxer.dto.SelectionCriteria;
 import java.util.List;
 
+import com.mycompany.listBoxer.dto.SelectionCriteria;
+
 /**
- *
+ * 
  * @author vbobina
  */
 public interface ListBoxerService {
 
-    Boolean saveContent(String userInput);
+	Boolean saveContent(String userInput);
 
-    List<String> getAll();
-    
-    List<String> getByRange(String range);
-    
-    List<String> getByCriteria(SelectionCriteria selCriteria);
-    
-    
+	List<String> getAll();
+
+	Boolean clearAll();
+
+	List<String> getByRange(String range);
+
+	List<String> getByCriteria(SelectionCriteria selCriteria);
+
 }

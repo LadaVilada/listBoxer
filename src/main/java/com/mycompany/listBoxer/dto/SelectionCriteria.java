@@ -5,49 +5,51 @@
  */
 package com.mycompany.listBoxer.dto;
 
+import java.io.Serializable;
+
 /**
- *
+ * 
  * @author vbobina
  */
-public class SelectionCriteria {
+public class SelectionCriteria implements Serializable {
 
-    private Boolean asc;
-    private Boolean desc;
-    private Boolean alphabetic;
-    private Boolean numeric;
+	private static final long serialVersionUID = 4285214603242991534L;
 
-    public Boolean getAsc() {
-        return asc;
-    }
+	private Boolean asc;
+	private Boolean desc;
+	private Boolean alphabetic;
+	private Boolean numeric;
 
-    public void setAsc(Boolean asc) {
-        this.asc = asc;
-    }
+	public Boolean getAsc() {
+		return asc;
+	}
 
-    public Boolean getDesc() {
-        return desc;
-    }
+	public void setAsc(Boolean asc) {
+		this.asc = asc;
+	}
 
-    public void setDesc(Boolean desc) {
-        this.desc = desc;
-    }
+	public Boolean getDesc() {
+		return desc;
+	}
 
-    public Boolean getAlphabetic() {
-        return alphabetic;
-    }
+	public void setDesc(Boolean desc) {
+		this.desc = desc;
+	}
 
-    public void setAlphabetic(Boolean alphabetic) {
-        this.alphabetic = alphabetic;
-    }
+	public Boolean getAlphabetic() {
+		return alphabetic;
+	}
 
-    public Boolean getNumeric() {
-        return numeric;
-    }
+	public void setAlphabetic(Boolean alphabetic) {
+		this.alphabetic = alphabetic;
+	}
 
-    public void setNumeric(Boolean numeric) {
-        this.numeric = numeric;
-    }
-    
-    
+	public Boolean getNumeric() {
+		return numeric;
+	}
+
+	public void setNumeric(Boolean numeric) {
+		this.numeric = numeric;
+	}
 
 }
