@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.mycompany.listBoxer.comporator.IntegerComorator;
 import com.mycompany.listBoxer.dto.RangeType;
 import com.mycompany.listBoxer.dto.SelectionCriteria;
 import com.mycompany.listBoxer.services.ListBoxerService;
@@ -60,7 +61,7 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 				selCriteria.getRange());
 
 		if (selCriteria.getAsc())
-			Collections.sort(rangeList);
+			Collections.sort(rangeList, new IntegerComorator());
 		else if (selCriteria.getDesc())
 			Collections.sort(rangeList, Collections.reverseOrder());
 
