@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 
  * @author vbobina
@@ -43,7 +45,7 @@ public enum RangeType {
 		RangeType[] enums = RangeType.values();
 
 		for (RangeType item : enums) {
-			if (rangeTypeKey != null && item.getKey().equals(rangeTypeKey)) {
+			if (StringUtils.isBlank(rangeTypeKey) && item.getKey().equals(rangeTypeKey)) {
 				return item;
 			}
 		}

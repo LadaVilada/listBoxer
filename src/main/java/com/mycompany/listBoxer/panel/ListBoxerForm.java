@@ -425,8 +425,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 				Integer intText = Integer.valueOf(text);
 				intText += 1;
 				TotalLabel.setText(intText.toString());
-				List<String> content = service.getAll();
-				jTextField2.setText(content.toString());
+				jTextField2.setText(service.getAll());
 			} catch (Exception ex) {
 				// TODO show error message
 			}
@@ -500,7 +499,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private javax.swing.JCheckBox NumericCheckBox;
 	private javax.swing.JMenuItem OpenItem;
 	private javax.swing.JMenuItem PasteItem;
-	private javax.swing.JComboBox RangeComboBox;
+	private javax.swing.JComboBox<String> RangeComboBox;
 	private javax.swing.JLabel RecordsLabel;
 	private javax.swing.JMenuItem SaveItem;
 	private javax.swing.JLabel TotalLabel;

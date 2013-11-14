@@ -19,6 +19,15 @@ public class SelectionCriteria implements Serializable {
 	private Boolean desc;
 	private Boolean alphabetic;
 	private Boolean numeric;
+	private RangeType range;
+
+	public RangeType getRange() {
+		return range;
+	}
+
+	public void setRange(RangeType range) {
+		this.range = range;
+	}
 
 	public Boolean getAsc() {
 		return asc;

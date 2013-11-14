@@ -17,12 +17,12 @@ public interface ListBoxerService {
 
 	Boolean saveContent(String userInput);
 
-	List<String> getAll();
+	String getAll();
 
 	Boolean clearAll();
 
-	List<String> getByRange(String range);
-
 	List<String> getByCriteria(SelectionCriteria selCriteria);
+
+	List<String> getContent();
 
 }
