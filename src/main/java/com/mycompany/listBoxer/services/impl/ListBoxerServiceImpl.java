@@ -56,14 +56,15 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 		 * 
 		 * 3.apply assortment
 		 */
-		List<String> resultList = getElementsByRange(getContent(),
+		List<String> rangeList = getElementsByRange(getContent(),
 				selCriteria.getRange());
-		if (selCriteria.getAsc())
-			Collections.sort(resultList);
-		else if (selCriteria.getDesc())
-			Collections.sort(resultList, Collections.reverseOrder());
 
-		return resultList;
+		if (selCriteria.getAsc())
+			Collections.sort(rangeList);
+		else if (selCriteria.getDesc())
+			Collections.sort(rangeList, Collections.reverseOrder());
+
+		return rangeList;
 	}
 
 	private List<String> getElementsByRange(List<String> list, RangeType range) {
@@ -97,23 +98,34 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 			}
 			break;
 		case NUM1: {
-			if (intervallContains(0, 100, Integer.parseInt(str)))
-				return true;
+			if (StringUtils.isNumeric(str)) {
+				if (intervallContains(0, 100, Integer.parseInt(str)))
+					return true;
+			}
+			break;
 
 		}
 		case NUM2: {
-			if (intervallContains(101, 200, Integer.parseInt(str)))
-				return true;
+			if (StringUtils.isNumeric(str)) {
+				if (intervallContains(101, 200, Integer.parseInt(str)))
+					return true;
+			}
+			break;
 		}
 
 		case NUM3: {
-			if (intervallContains(201, 300, Integer.parseInt(str)))
-				return true;
-
+			if (StringUtils.isNumeric(str)) {
+				if (intervallContains(201, 300, Integer.parseInt(str)))
+					return true;
+			}
+			break;
 		}
 		case NUM4: {
-			if (intervallContains(300, 999, Integer.parseInt(str)))
-				return true;
+			if (StringUtils.isNumeric(str)) {
+				if (intervallContains(300, 999, Integer.parseInt(str)))
+					return true;
+			}
+			break;
 
 		}
 
