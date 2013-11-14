@@ -11,42 +11,34 @@ import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
 
 /**
- * This test has covered the filter logic. User fill all necessary fields(range,
- * sort order and what type of symbols should be allowed.) Input check connected
- * with type of symbols will be checked in eventListener for user input in
- * textBox field.
- * 
- * Let's consider the situation where user input 5 lines and after that change
- * the current range to 'A-M,a-m'.
- * 
- * The result will follow : the size of list should change from 5 to 3 lines and
- * according to sort order the first element in list should be apple
- * 
  * 
  * @author vbobina
+ * 
  */
 
-public class FilterMockitoTest {
+public class FilterCombineMockitoTest {
 
 	private ListBoxerService service = new ListBoxerServiceImpl();
-	private static final String[] USER_INPUT = new String[] { "apple", "bear",
-			"nike", "moody", "zieben" };
+	private static final String[] USER_INPUT = new String[] { "13", "140", "0",
+			"bear", "101", "zieben", "apple" };
 
 	@Test
-	public void getByRange_RangeInA_M_Success() {
+	public void getByRange_RangeInAll_Success() {
 		/*
 		 * 1. create SelectionCriteria and fill it
 		 * 
 		 * 2. init content list
 		 * 
-		 * 3.call method getByRange 4. Expected result (Assert)
+		 * 3.call method getByRange
+		 * 
+		 * 4. Expected result (Assert)
 		 */
 
 		SelectionCriteria criteria = getSelectionCriteria();
 		getContentList();
 		List<String> content = service.getByCriteria(criteria);
-		Assert.assertEquals(3, content.size());
-		Assert.assertEquals(USER_INPUT[0], content.get(0));
+		Assert.assertEquals(7, content.size());
+		Assert.assertEquals(USER_INPUT[2], content.get(0));
 		service.clearAll();
 	}
 
@@ -55,8 +47,8 @@ public class FilterMockitoTest {
 		criteria.setAsc(Boolean.TRUE);
 		criteria.setDesc(Boolean.FALSE);
 		criteria.setAlphabetic(Boolean.TRUE);
-		criteria.setNumeric(Boolean.FALSE);
-		criteria.setRange(RangeType.AM);
+		criteria.setNumeric(Boolean.TRUE);
+		criteria.setRange(RangeType.ALL);
 
 		return criteria;
 
@@ -68,4 +60,5 @@ public class FilterMockitoTest {
 		}
 
 	}
+
 }

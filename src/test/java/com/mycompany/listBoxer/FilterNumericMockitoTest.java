@@ -16,6 +16,8 @@ import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
  *  descending sort
  * digits type only
  * range [0-100]
+ * 
+ * 
  * @author vbobina
  */
 
@@ -26,7 +28,7 @@ public class FilterNumericMockitoTest {
 			"bear", "101", "zieben" };
 
 	@Test
-	public void getByRange_RangeInA_M_Success() {
+	public void getByRange_RangeInNUM1_Success() {
 		/*
 		 * 1. create SelectionCriteria and fill it
 		 * 
