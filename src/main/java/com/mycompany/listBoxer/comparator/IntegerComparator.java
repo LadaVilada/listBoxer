@@ -1,8 +1,8 @@
-package com.mycompany.listBoxer.comporator;
+package com.mycompany.listBoxer.comparator;
 
 import java.util.Comparator;
 
-public class IntegerComorator implements Comparator<String> {
+public class IntegerComparator implements Comparator<String> {
 
 	@Override
 	public int compare(String o1, String o2) {
