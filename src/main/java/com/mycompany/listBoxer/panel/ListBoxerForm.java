@@ -14,10 +14,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
-<<<<<<< HEAD
 import javax.swing.text.DefaultFormatterFactory;
-=======
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 import javax.swing.text.MaskFormatter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,11 +33,8 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	private ListBoxerService service = new ListBoxerServiceImpl();
 
-<<<<<<< HEAD
 	private DefaultFormatterFactory factory = new DefaultFormatterFactory();
 
-=======
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 	public ListBoxerForm() throws ParseException {
 		initComponents();
 
@@ -62,11 +56,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		buttonGroup2 = new javax.swing.ButtonGroup();
 		RangeComboBox = new javax.swing.JComboBox();
 		jLabel1 = new javax.swing.JLabel();
-<<<<<<< HEAD
 		jTextField1 = new JFormattedTextField();
-=======
-		jTextField1 = new JFormattedTextField(new MaskFormatter("****"));
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 		AddButton = new javax.swing.JButton();
 		AscendingRadioButton = new javax.swing.JRadioButton();
 		DescendingRadioButton = new javax.swing.JRadioButton();
@@ -180,28 +170,16 @@ public class ListBoxerForm extends javax.swing.JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				NumericCheckBoxActionPerformed(e);
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 			}
 		});
 
 		buttonGroup2.add(CombinedCheckBox);
 		CombinedCheckBox.setText("Combined");
-<<<<<<< HEAD
-=======
-		CombinedCheckBox.setSelected(Boolean.TRUE);
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 		CombinedCheckBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CombinedCheckBoxActionPerformed(e);
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 			}
 		});
 
@@ -509,7 +487,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void AlphabeticCheckBoxActionPerformed(ActionEvent evt) {
-<<<<<<< HEAD
 		try {
 			jTextField1.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter((new MaskFormatter("????")));
@@ -517,15 +494,12 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		} catch (ParseException e) {
 			e.getMessage();
 		}
-=======
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.AM.getKey(),
 				RangeType.NZ.getKey() }));
 	}
 
 	private void NumericCheckBoxActionPerformed(ActionEvent evt) {
-<<<<<<< HEAD
 		try {
 			jTextField1.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter(new MaskFormatter("####"));
@@ -533,8 +507,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		} catch (ParseException e) {
 			e.getMessage();
 		}
-=======
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.NUM1.getKey(),
 				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
@@ -542,7 +514,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void CombinedCheckBoxActionPerformed(ActionEvent evt) {
-<<<<<<< HEAD
 		try {
 			jTextField1.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter(new MaskFormatter("****"));
@@ -550,8 +521,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		} catch (ParseException e) {
 			e.getMessage();
 		}
-=======
->>>>>>> 4e3b078be3ba24380e05053c3d8d09240088f611
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.AM.getKey(),
 				RangeType.NZ.getKey(), RangeType.NUM1.getKey(),
