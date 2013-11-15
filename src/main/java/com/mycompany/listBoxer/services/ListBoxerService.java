@@ -25,4 +25,6 @@ public interface ListBoxerService {
 
 	List<String> getContent();
 
+	List<String> getRangeListBySymbols(SelectionCriteria selCriteria);
+
 }

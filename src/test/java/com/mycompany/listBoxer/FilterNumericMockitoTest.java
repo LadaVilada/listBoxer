@@ -25,7 +25,7 @@ public class FilterNumericMockitoTest {
 
 	private ListBoxerService service = new ListBoxerServiceImpl();
 	private static final String[] USER_INPUT = new String[] { "14", "0",
-			"bear", "101", "zieben" };
+			"bear", "101", "zieben", "" };
 
 	@Test
 	public void getByRange_RangeInNUM1_Success() {

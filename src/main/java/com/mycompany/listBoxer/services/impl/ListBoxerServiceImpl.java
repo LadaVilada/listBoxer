@@ -68,6 +68,12 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 		return rangeList;
 	}
 
+	@Override
+	public List<String> getRangeListBySymbols(SelectionCriteria selCriteria) {
+
+		return null;
+	}
+
 	private List<String> getElementsByRange(List<String> list,
 			SelectionCriteria criteria) {
 		List<String> result = new ArrayList<String>();
@@ -260,4 +266,5 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 	public List<String> getContent() {
 		return content;
 	}
+
 }

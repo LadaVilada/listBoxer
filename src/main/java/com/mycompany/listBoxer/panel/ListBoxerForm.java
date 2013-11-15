@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 
 import org.apache.commons.lang3.StringUtils;
@@ -82,6 +83,23 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		String[] arrays = new String[rangeList.size()];
 		RangeComboBox.setModel(new javax.swing.DefaultComboBoxModel(rangeList
 				.toArray(arrays)));
+		RangeComboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				justDoIt();
+			}
+
+			private void justDoIt() {
+				if (NumericCheckBox.isSelected()) {
+
+				} else if (AlphabeticCheckBox.isSelected()) {
+
+				} else {
+
+				}
+			}
+		});
 
 		jLabel1.setText("Range");
 
@@ -129,18 +147,33 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 		buttonGroup2.add(AlphabeticCheckBox);
 		AlphabeticCheckBox.setText("Alphabetic");
-		AlphabeticCheckBox
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						AlphabeticCheckBoxActionPerformed(evt);
-					}
-				});
+		AlphabeticCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				AlphabeticCheckBoxActionPerformed(evt);
+			}
+		});
 
 		buttonGroup2.add(NumericCheckBox);
 		NumericCheckBox.setText("Numeric");
+		NumericCheckBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NumericCheckBoxActionPerformed(e);
+
+			}
+		});
 
 		buttonGroup2.add(CombinedCheckBox);
 		CombinedCheckBox.setText("Combined");
+		CombinedCheckBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CombinedCheckBoxActionPerformed(e);
+
+			}
+		});
 
 		jLabel6.setText("Symbols :");
 
@@ -445,9 +478,25 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	}
 
-	private void AlphabeticCheckBoxActionPerformed(
-			java.awt.event.ActionEvent evt) {
+	private void AlphabeticCheckBoxActionPerformed(ActionEvent evt) {
+		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
+				RangeType.ALL.getKey(), RangeType.AM.getKey(),
+				RangeType.NZ.getKey() }));
+	}
 
+	private void NumericCheckBoxActionPerformed(ActionEvent evt) {
+		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
+				RangeType.ALL.getKey(), RangeType.NUM1.getKey(),
+				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
+				RangeType.NUM4.getKey() }));
+	}
+
+	private void CombinedCheckBoxActionPerformed(ActionEvent evt) {
+		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
+				RangeType.ALL.getKey(), RangeType.AM.getKey(),
+				RangeType.NZ.getKey(), RangeType.NUM1.getKey(),
+				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
+				RangeType.NUM4.getKey() }));
 	}
 
 	public static void main(String args[]) {
