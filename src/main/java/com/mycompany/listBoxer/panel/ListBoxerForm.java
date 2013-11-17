@@ -6,6 +6,7 @@
 
 package com.mycompany.listBoxer.panel;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -49,8 +51,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	 * @throws ParseException
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() throws ParseException {
 
 		buttonGroup1 = new javax.swing.ButtonGroup();
@@ -206,6 +206,13 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		FileMenuItem.add(SaveItem);
 
 		ExitItem.setText("Exit");
+		ExitItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(1);
+			}
+		});
 		FileMenuItem.add(ExitItem);
 
 		MainMenu.add(FileMenuItem);
@@ -230,6 +237,16 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		HelpMenuItem.setText("Help");
 
 		AboutItem.setText("About ListBoxer");
+		AboutItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				StringBuilder builder = new StringBuilder();
+				builder.append("List Boxer\n");
+				builder.append("author: LadaVilada.");
+				JOptionPane.showMessageDialog(new Frame(), builder.toString());
+			}
+		});
 		HelpMenuItem.add(AboutItem);
 
 		MainMenu.add(HelpMenuItem);
@@ -473,14 +490,18 @@ public class ListBoxerForm extends javax.swing.JFrame {
 				Integer intText = Integer.valueOf(text);
 				intText += 1;
 				TotalLabel.setText(intText.toString());
-				jTextArea.setText(service.getAll());
+				doFilter();
 			} catch (Exception ex) {
-				// TODO show error message
+				JOptionPane.showMessageDialog(new Frame(),
+						String.format("%s", ex.getMessage()), "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			jTextInput.setText(StringUtils.EMPTY);
 			jTextInput.setValue(null);
 		} else {
-			// TODO show error message
+			JOptionPane.showMessageDialog(new Frame(),
+					"We can not add empity string!", "Validation error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -489,7 +510,9 @@ public class ListBoxerForm extends javax.swing.JFrame {
 			jTextArea.setText(StringUtils.EMPTY);
 			TotalLabel.setText("0");
 		} else {
-			// TODO show error message
+			JOptionPane.showMessageDialog(new Frame(),
+					"Error while trying clearing text area", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -587,7 +610,9 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		}
 		criteria.setRange(RangeType.fromKey(RangeComboBox.getSelectedItem()
 				.toString()));
-		jTextArea.setText(getStringByList(service.getByCriteria(criteria)));
+		List<String> list = service.getByCriteria(criteria);
+		RecordsLabel.setText(String.format("%s", list.size()));
+		jTextArea.setText(getStringByList(list));
 	}
 
 	private String getStringByList(List<String> list) {
