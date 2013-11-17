@@ -20,6 +20,7 @@ import javax.swing.text.MaskFormatter;
 import org.apache.commons.lang3.StringUtils;
 
 import com.mycompany.listBoxer.dto.RangeType;
+import com.mycompany.listBoxer.dto.SelectionCriteria;
 import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
 
@@ -56,11 +57,11 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		buttonGroup2 = new javax.swing.ButtonGroup();
 		RangeComboBox = new javax.swing.JComboBox();
 		jLabel1 = new javax.swing.JLabel();
-		jTextField1 = new JFormattedTextField();
+		jTextInput = new JFormattedTextField(new MaskFormatter("****"));
 		AddButton = new javax.swing.JButton();
 		AscendingRadioButton = new javax.swing.JRadioButton();
 		DescendingRadioButton = new javax.swing.JRadioButton();
-		jTextField2 = new JTextArea();
+		jTextArea = new JTextArea();
 		ClearButton = new javax.swing.JButton();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
@@ -95,29 +96,19 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				justDoIt();
-			}
-
-			private void justDoIt() {
-				if (NumericCheckBox.isSelected()) {
-
-				} else if (AlphabeticCheckBox.isSelected()) {
-
-				} else {
-
-				}
+				doFilter();
 			}
 		});
 
 		jLabel1.setText("Range");
 
-		jTextField1.addActionListener(new java.awt.event.ActionListener() {
+		jTextInput.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField1ActionPerformed(evt);
 			}
 		});
 
-		jTextField2.setEditable(Boolean.FALSE);
+		jTextArea.setEditable(Boolean.FALSE);
 
 		AddButton.setText("Add to list");
 		AddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,15 +119,30 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 		buttonGroup1.add(AscendingRadioButton);
 		AscendingRadioButton.setText("Ascending");
+		AscendingRadioButton.setSelected(Boolean.TRUE);
 		AscendingRadioButton.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Sort Order"));
 		AscendingRadioButton.setName("Sort Order"); // NOI18N
+		AscendingRadioButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				doFilter();
+			}
+		});
 
 		buttonGroup1.add(DescendingRadioButton);
 		DescendingRadioButton.setText("Descending");
 		DescendingRadioButton.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Sort Order"));
 		DescendingRadioButton.setName("Sort Order"); // NOI18N
+		DescendingRadioButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doFilter();
+			}
+		});
 
 		ClearButton.setText("Clear list");
 		ClearButton.addActionListener(new ActionListener() {
@@ -175,6 +181,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 		buttonGroup2.add(CombinedCheckBox);
 		CombinedCheckBox.setText("Combined");
+		CombinedCheckBox.setSelected(Boolean.TRUE);
 		CombinedCheckBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -282,12 +289,12 @@ public class ListBoxerForm extends javax.swing.JFrame {
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(
-														jTextField2,
+														jTextArea,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														198,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														jTextField1,
+														jTextInput,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														198,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -358,7 +365,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(jLabel1)
 												.addComponent(
-														jTextField1,
+														jTextInput,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														31,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,7 +414,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 																				javax.swing.GroupLayout.Alignment.TRAILING,
 																				false)
 																				.addComponent(
-																						jTextField2,
+																						jTextArea,
 																						javax.swing.GroupLayout.Alignment.LEADING)
 																				.addGroup(
 																						layout.createSequentialGroup()
@@ -460,17 +467,18 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		if (service.saveContent(jTextField1.getText())) {
+		if (service.saveContent(jTextInput.getText())) {
 			String text = TotalLabel.getText();
 			try {
 				Integer intText = Integer.valueOf(text);
 				intText += 1;
 				TotalLabel.setText(intText.toString());
-				jTextField2.setText(service.getAll());
+				jTextArea.setText(service.getAll());
 			} catch (Exception ex) {
 				// TODO show error message
 			}
-			jTextField1.setText(StringUtils.EMPTY);
+			jTextInput.setText(StringUtils.EMPTY);
+			jTextInput.setValue(null);
 		} else {
 			// TODO show error message
 		}
@@ -478,7 +486,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	private void ClearButtonActionPerformed(ActionEvent event) {
 		if (service.clearAll()) {
-			jTextField2.setText(StringUtils.EMPTY);
+			jTextArea.setText(StringUtils.EMPTY);
 			TotalLabel.setText("0");
 		} else {
 			// TODO show error message
@@ -488,22 +496,23 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	private void AlphabeticCheckBoxActionPerformed(ActionEvent evt) {
 		try {
-			jTextField1.setValue(StringUtils.EMPTY);
+			jTextInput.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter((new MaskFormatter("????")));
-			jTextField1.setFormatterFactory(factory);
+			jTextInput.setFormatterFactory(factory);
 		} catch (ParseException e) {
 			e.getMessage();
 		}
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.AM.getKey(),
 				RangeType.NZ.getKey() }));
+		doFilter();
 	}
 
 	private void NumericCheckBoxActionPerformed(ActionEvent evt) {
 		try {
-			jTextField1.setValue(StringUtils.EMPTY);
+			jTextInput.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter(new MaskFormatter("####"));
-			jTextField1.setFormatterFactory(factory);
+			jTextInput.setFormatterFactory(factory);
 		} catch (ParseException e) {
 			e.getMessage();
 		}
@@ -511,13 +520,14 @@ public class ListBoxerForm extends javax.swing.JFrame {
 				RangeType.ALL.getKey(), RangeType.NUM1.getKey(),
 				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
 				RangeType.NUM4.getKey() }));
+		doFilter();
 	}
 
 	private void CombinedCheckBoxActionPerformed(ActionEvent evt) {
 		try {
-			jTextField1.setValue(StringUtils.EMPTY);
+			jTextInput.setValue(StringUtils.EMPTY);
 			factory.setDefaultFormatter(new MaskFormatter("****"));
-			jTextField1.setFormatterFactory(factory);
+			jTextInput.setFormatterFactory(factory);
 		} catch (ParseException e) {
 			e.getMessage();
 		}
@@ -526,6 +536,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 				RangeType.NZ.getKey(), RangeType.NUM1.getKey(),
 				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
 				RangeType.NUM4.getKey() }));
+		doFilter();
 	}
 
 	public static void main(String args[]) {
@@ -564,6 +575,30 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		});
 	}
 
+	private void doFilter() {
+		SelectionCriteria criteria = new SelectionCriteria();
+		criteria.setAlphabetic(AlphabeticCheckBox.isSelected());
+		criteria.setNumeric(NumericCheckBox.isSelected());
+		criteria.setAsc(AscendingRadioButton.isSelected());
+		criteria.setDesc(DescendingRadioButton.isSelected());
+		if (CombinedCheckBox.isSelected()) {
+			criteria.setAlphabetic(Boolean.TRUE);
+			criteria.setNumeric(Boolean.TRUE);
+		}
+		criteria.setRange(RangeType.fromKey(RangeComboBox.getSelectedItem()
+				.toString()));
+		jTextArea.setText(getStringByList(service.getByCriteria(criteria)));
+	}
+
+	private String getStringByList(List<String> list) {
+		StringBuffer buffer = new StringBuffer();
+		for (String item : list) {
+			buffer.append(String.format("%s\n", item));
+		}
+
+		return buffer.toString();
+	}
+
 	private javax.swing.JMenuItem AboutItem;
 	private javax.swing.JButton AddButton;
 	private javax.swing.JCheckBox AlphabeticCheckBox;
@@ -594,6 +629,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JPopupMenu.Separator jSeparator2;
-	private JFormattedTextField jTextField1;
-	private javax.swing.JTextArea jTextField2;
+	private JFormattedTextField jTextInput;
+	private javax.swing.JTextArea jTextArea;
 }

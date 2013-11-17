@@ -45,13 +45,14 @@ public enum RangeType {
 		RangeType[] enums = RangeType.values();
 
 		for (RangeType item : enums) {
-			if (StringUtils.isBlank(rangeTypeKey) && item.getKey().equals(rangeTypeKey)) {
+			if (StringUtils.isNotBlank(rangeTypeKey)
+					&& item.getKey().equals(rangeTypeKey)) {
 				return item;
 			}
 		}
 
-		throw new IllegalArgumentException(String.format(
-				"Unknown cssClassName %s", RangeType.class));
+		throw new IllegalArgumentException(String.format("Unknown key %s",
+				RangeType.class));
 	}
 
 	public String getKey() {

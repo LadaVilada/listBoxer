@@ -30,10 +30,15 @@ public class RangeUtils {
 		}
 
 		if (criteria.getAlphabetic()) {
+			if (ObjectUtils.equals(criteria.getRange(), RangeType.ALL))
+				if (!StringUtils.isNumeric(value))
+					return Boolean.TRUE;
+
 			if (ObjectUtils.equals(criteria.getRange(), RangeType.AM)) {
 				if (Pattern.matches(RANGE_AM, value.substring(0, 1)))
 					return Boolean.TRUE;
 			}
+
 			if (ObjectUtils.equals(criteria.getRange(), RangeType.NZ)) {
 				if (Pattern.matches(RANGE_NZ, value.substring(0, 1))) {
 					return Boolean.TRUE;
@@ -43,6 +48,10 @@ public class RangeUtils {
 
 		if (criteria.getNumeric()) {
 			switch (criteria.getRange()) {
+			case ALL:
+				if (StringUtils.isNumeric(value))
+					return Boolean.TRUE;
+				break;
 			case NUM1:
 				if (StringUtils.isNumeric(value)) {
 					if (intervallContains(0, 100, Integer.parseInt(value)))
@@ -66,7 +75,7 @@ public class RangeUtils {
 
 			case NUM4:
 				if (StringUtils.isNumeric(value)) {
-					if (intervallContains(301, 999, Integer.parseInt(value)))
+					if (intervallContains(301, 9999, Integer.parseInt(value)))
 						return Boolean.TRUE;
 				}
 				break;
