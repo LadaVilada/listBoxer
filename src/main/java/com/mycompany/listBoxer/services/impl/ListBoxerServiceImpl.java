@@ -60,6 +60,9 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 		 * 
 		 * 3.apply assortment
 		 */
+		if (selCriteria == null)
+			return new ArrayList<String>();
+
 		List<String> rangeList = getElementsByRange(getContent(), selCriteria);
 
 		if (selCriteria.getAsc())
@@ -68,11 +71,6 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 			Collections.sort(rangeList, Collections.reverseOrder());
 
 		return rangeList;
-	}
-
-	@Override
-	public List<String> getRangeListBySymbols(SelectionCriteria selCriteria) {
-		return null;
 	}
 
 	@Override

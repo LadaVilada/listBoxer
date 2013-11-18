@@ -45,6 +45,13 @@ public class RangeMockitoTest {
 
 	}
 
+	@Test
+	public void getByCriteria_NullCriteria_EmptyList() {
+		List<String> resList = service.getByCriteria(null);
+		Assert.assertNotNull(resList);
+		Assert.assertEquals(0, resList.size());
+	}
+
 	private void getContentList() {
 		for (int i = 0; i < USER_INPUT.length; i++) {
 			service.saveContent(USER_INPUT[i]);
