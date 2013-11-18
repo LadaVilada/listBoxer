@@ -9,15 +9,22 @@ package com.mycompany.listBoxer.panel;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFormattedTextField;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JTextField;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,6 +32,7 @@ import com.mycompany.listBoxer.dto.RangeType;
 import com.mycompany.listBoxer.dto.SelectionCriteria;
 import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
+import com.mycompany.listBoxer.utils.ListBoxerFileFilter;
 
 /**
  * 
@@ -35,8 +43,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private static final long serialVersionUID = 5507256401682059615L;
 
 	private ListBoxerService service = new ListBoxerServiceImpl();
-
-	private DefaultFormatterFactory factory = new DefaultFormatterFactory();
 
 	public ListBoxerForm() throws ParseException {
 		initComponents();
@@ -57,7 +63,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		buttonGroup2 = new javax.swing.ButtonGroup();
 		RangeComboBox = new javax.swing.JComboBox();
 		jLabel1 = new javax.swing.JLabel();
-		jTextInput = new JFormattedTextField(new MaskFormatter("****"));
+		jTextInput = new JTextField();
 		AddButton = new javax.swing.JButton();
 		AscendingRadioButton = new javax.swing.JRadioButton();
 		DescendingRadioButton = new javax.swing.JRadioButton();
@@ -200,9 +206,81 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		FileMenuItem.setText("File");
 
 		OpenItem.setText("Open");
+		OpenItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				List<String> expansions = new ArrayList<String>();
+				expansions.addAll(Arrays.asList(new String[] { "lbx", "LBX" }));
+				chooser.setFileFilter(new ListBoxerFileFilter(".lbx files",
+						expansions));
+				int rVal = chooser.showOpenDialog(ListBoxerForm.this);
+				if (rVal == JFileChooser.APPROVE_OPTION) {
+					File file = new File(chooser.getSelectedFile()
+							.getAbsolutePath());
+					try {
+						FileReader reader = new FileReader(file);
+						BufferedReader buffer = new BufferedReader(reader);
+						List<String> tmp = service.getContent();
+						try {
+							service.clearAll();
+							String line;
+							while ((line = buffer.readLine()) != null) {
+								service.getContent().add(line);
+							}
+							doFilter();
+						} catch (IOException ioex) {
+							JOptionPane.showMessageDialog(new Frame(),
+									String.format("%s", ioex.getMessage()),
+									"Error", JOptionPane.ERROR_MESSAGE);
+							service.getContent().addAll(tmp);
+							doFilter();
+						} finally {
+							try {
+								buffer.close();
+								reader.close();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					} catch (FileNotFoundException ex) {
+						JOptionPane.showMessageDialog(new Frame(),
+								String.format("%s", ex.getMessage()), "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 		FileMenuItem.add(OpenItem);
 
 		SaveItem.setText("Save as");
+		SaveItem.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("resource")
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				JFileChooser chooser = new JFileChooser();
+				List<String> expansions = new ArrayList<String>();
+				expansions.addAll(Arrays.asList(new String[] { "lbx", "LBX" }));
+				chooser.setFileFilter(new ListBoxerFileFilter(".lbx files",
+						expansions));
+				int rVal = chooser.showSaveDialog(ListBoxerForm.this);
+				if (rVal == JFileChooser.APPROVE_OPTION) {
+					File file = new File(String.format("%s.lbx", chooser
+							.getSelectedFile().getAbsolutePath()));
+					try {
+						FileWriter write = new FileWriter(file);
+						write.append(service.getAll());
+						write.flush();
+					} catch (IOException e) {
+						JOptionPane.showMessageDialog(new Frame(),
+								String.format("%s", e.getMessage()), "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 		FileMenuItem.add(SaveItem);
 
 		ExitItem.setText("Exit");
@@ -484,6 +562,28 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
+		if (AlphabeticCheckBox.isSelected()
+				&& StringUtils.isNumeric(jTextInput.getText())) {
+			JOptionPane
+					.showMessageDialog(
+							new Frame(),
+							"You won’t be able to add numbers in case of alphabetic mode!",
+							"Validation error", JOptionPane.ERROR_MESSAGE);
+			jTextInput.setText(StringUtils.EMPTY);
+			return;
+		}
+
+		if (NumericCheckBox.isSelected()
+				&& !StringUtils.isNumeric(jTextInput.getText())) {
+			JOptionPane
+					.showMessageDialog(
+							new Frame(),
+							"You won’t be able to add characters in case of numeric mode",
+							"Validation error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		if (service.saveContent(jTextInput.getText())) {
 			String text = TotalLabel.getText();
 			try {
@@ -497,7 +597,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			jTextInput.setText(StringUtils.EMPTY);
-			jTextInput.setValue(null);
 		} else {
 			JOptionPane.showMessageDialog(new Frame(),
 					"We can not add empity string!", "Validation error",
@@ -509,6 +608,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		if (service.clearAll()) {
 			jTextArea.setText(StringUtils.EMPTY);
 			TotalLabel.setText("0");
+			RecordsLabel.setText("0");
 		} else {
 			JOptionPane.showMessageDialog(new Frame(),
 					"Error while trying clearing text area", "Error",
@@ -518,13 +618,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void AlphabeticCheckBoxActionPerformed(ActionEvent evt) {
-		try {
-			jTextInput.setValue(StringUtils.EMPTY);
-			factory.setDefaultFormatter((new MaskFormatter("????")));
-			jTextInput.setFormatterFactory(factory);
-		} catch (ParseException e) {
-			e.getMessage();
-		}
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.AM.getKey(),
 				RangeType.NZ.getKey() }));
@@ -532,13 +625,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void NumericCheckBoxActionPerformed(ActionEvent evt) {
-		try {
-			jTextInput.setValue(StringUtils.EMPTY);
-			factory.setDefaultFormatter(new MaskFormatter("####"));
-			jTextInput.setFormatterFactory(factory);
-		} catch (ParseException e) {
-			e.getMessage();
-		}
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.NUM1.getKey(),
 				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
@@ -547,13 +633,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	}
 
 	private void CombinedCheckBoxActionPerformed(ActionEvent evt) {
-		try {
-			jTextInput.setValue(StringUtils.EMPTY);
-			factory.setDefaultFormatter(new MaskFormatter("****"));
-			jTextInput.setFormatterFactory(factory);
-		} catch (ParseException e) {
-			e.getMessage();
-		}
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.ALL.getKey(), RangeType.AM.getKey(),
 				RangeType.NZ.getKey(), RangeType.NUM1.getKey(),
@@ -620,7 +699,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		for (String item : list) {
 			buffer.append(String.format("%s\n", item));
 		}
-
 		return buffer.toString();
 	}
 
@@ -654,6 +732,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JPopupMenu.Separator jSeparator2;
-	private JFormattedTextField jTextInput;
+	private JTextField jTextInput;
 	private javax.swing.JTextArea jTextArea;
 }
