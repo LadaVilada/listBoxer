@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -50,6 +51,9 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private ListBoxerService service = new ListBoxerServiceImpl();
 
 	public ListBoxerForm() throws ParseException {
+		ImageIcon icon = new ImageIcon(
+				"src/main/java/com/mycompany/listBoxer/image/package_toys.png");
+		this.setIconImage(icon.getImage());
 		initComponents();
 	}
 
