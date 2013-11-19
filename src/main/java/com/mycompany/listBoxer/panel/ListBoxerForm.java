@@ -26,7 +26,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +35,7 @@ import com.mycompany.listBoxer.dto.SelectionCriteria;
 import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
 import com.mycompany.listBoxer.utils.ListBoxerFileFilter;
+import com.mycompany.listBoxer.utils.MaskedInputTextField;
 
 /**
  * 
@@ -66,7 +66,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		buttonGroup2 = new javax.swing.ButtonGroup();
 		RangeComboBox = new javax.swing.JComboBox();
 		jLabel1 = new javax.swing.JLabel();
-		jTextInput = new JTextField();
+		jTextInput = new MaskedInputTextField("*", 4);
 		AddButton = new javax.swing.JButton();
 		AscendingRadioButton = new javax.swing.JRadioButton();
 		DescendingRadioButton = new javax.swing.JRadioButton();
@@ -580,27 +580,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-		if (AlphabeticCheckBox.isSelected()
-				&& StringUtils.isNumeric(jTextInput.getText())) {
-			JOptionPane
-					.showMessageDialog(
-							new Frame(),
-							"You won’t be able to add numbers in case of alphabetic mode!",
-							"Validation error", JOptionPane.ERROR_MESSAGE);
-			jTextInput.setText(StringUtils.EMPTY);
-			return;
-		}
-
-		if (NumericCheckBox.isSelected()
-				&& !StringUtils.isNumeric(jTextInput.getText())) {
-			JOptionPane
-					.showMessageDialog(
-							new Frame(),
-							"You won’t be able to add characters in case of numeric mode",
-							"Validation error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
 		if (service.saveContent(jTextInput.getText())) {
 			String text = TotalLabel.getText();
 			try {
@@ -638,6 +617,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
 				RangeType.NONE.getKey(), RangeType.ALL.getKey(),
 				RangeType.AM.getKey(), RangeType.NZ.getKey() }));
+		jTextInput.setMask("?");
 		doFilter();
 	}
 
@@ -646,6 +626,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 				RangeType.NONE.getKey(), RangeType.ALL.getKey(),
 				RangeType.NUM1.getKey(), RangeType.NUM2.getKey(),
 				RangeType.NUM3.getKey(), RangeType.NUM4.getKey() }));
+		jTextInput.setMask("#");
 		doFilter();
 	}
 
@@ -749,6 +730,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JPopupMenu.Separator jSeparator2;
-	private JTextField jTextInput;
+	private MaskedInputTextField jTextInput;
 	private javax.swing.JTextArea jTextArea;
 }
