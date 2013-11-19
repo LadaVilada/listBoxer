@@ -10,7 +10,9 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,7 +51,6 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	public ListBoxerForm() throws ParseException {
 		initComponents();
-
 	}
 
 	/**
@@ -111,6 +112,17 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 		jLabel1.setText("Range");
 
+		jTextInput.addKeyListener((KeyListener) new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				super.keyReleased(e);
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (!StringUtils.isBlank(jTextInput.getText())) {
+						AddButtonActionPerformed();
+					}
+				}
+			}
+		});
 		jTextInput.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField1ActionPerformed(evt);
@@ -122,7 +134,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		AddButton.setText("Add to list");
 		AddButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AddButtonActionPerformed(evt);
+				AddButtonActionPerformed();
 			}
 		});
 
@@ -578,7 +590,7 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	}
 
-	private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	private void AddButtonActionPerformed() {
 
 		if (service.saveContent(jTextInput.getText())) {
 			String text = TotalLabel.getText();
