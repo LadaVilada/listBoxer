@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 public enum RangeType {
 
 	ALL("All"), AM("A-M, a-m"), NZ("N-Z, n-z"), NUM1("0-100"), NUM2("101-200"), NUM3(
-			"201-300"), NUM4("301-9999");
+			"201-300"), NUM4("301-9999"), NONE("<none>");
 
 	private final String key;
 

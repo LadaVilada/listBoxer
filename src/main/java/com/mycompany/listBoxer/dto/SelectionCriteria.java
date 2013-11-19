@@ -26,6 +26,7 @@ public class SelectionCriteria implements Serializable {
 		this.desc = Boolean.FALSE;
 		this.alphabetic = Boolean.FALSE;
 		this.numeric = Boolean.FALSE;
+		// this.range = RangeType.ALL;
 	}
 
 	public RangeType getRange() {

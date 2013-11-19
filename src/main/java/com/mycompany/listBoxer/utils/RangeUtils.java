@@ -23,6 +23,10 @@ public class RangeUtils {
 			return Boolean.FALSE;
 		}
 
+		if (ObjectUtils.equals(criteria.getRange(), RangeType.NONE)) {
+			return Boolean.FALSE;
+		}
+
 		if (criteria.getAlphabetic() && criteria.getNumeric()) {
 			if (ObjectUtils.equals(criteria.getRange(), RangeType.ALL)) {
 				return Boolean.TRUE;

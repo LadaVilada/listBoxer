@@ -1,5 +1,17 @@
 package com.mycompany.listBoxer;
 
+/**
+ * Class RangeUtils should :
+ * 1.Check if the given String value is in range according to given criteria
+ * 
+ * (-isInRange(String value, SelectionCriteria criteria))
+ * 
+ * 2.Check if the given int value falls within the range
+ * 
+ * (-Boolean intervallContains(int low, int high, int n))
+ * 
+ * @author vbobina 
+ */
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -83,6 +95,14 @@ public class RangeUtilsTest {
 		criteria.setRange(RangeType.NUM4);
 		Boolean res = RangeUtils.isInRange("400", criteria);
 		Assert.assertTrue(res);
+	}
+
+	@Test
+	public void isInRange_AnyCriteriaAndRangeTypeNone_False() {
+		SelectionCriteria criteria = new SelectionCriteria();
+		criteria.setRange(RangeType.NONE);
+		Boolean res = RangeUtils.isInRange("doesn't matter", criteria);
+		Assert.assertFalse(res);
 	}
 
 	private SelectionCriteria getSelectionCriteria() {

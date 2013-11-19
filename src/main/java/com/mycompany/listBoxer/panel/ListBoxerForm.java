@@ -619,25 +619,25 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 	private void AlphabeticCheckBoxActionPerformed(ActionEvent evt) {
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
-				RangeType.ALL.getKey(), RangeType.AM.getKey(),
-				RangeType.NZ.getKey() }));
+				RangeType.NONE.getKey(), RangeType.ALL.getKey(),
+				RangeType.AM.getKey(), RangeType.NZ.getKey() }));
 		doFilter();
 	}
 
 	private void NumericCheckBoxActionPerformed(ActionEvent evt) {
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
-				RangeType.ALL.getKey(), RangeType.NUM1.getKey(),
-				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
-				RangeType.NUM4.getKey() }));
+				RangeType.NONE.getKey(), RangeType.ALL.getKey(),
+				RangeType.NUM1.getKey(), RangeType.NUM2.getKey(),
+				RangeType.NUM3.getKey(), RangeType.NUM4.getKey() }));
 		doFilter();
 	}
 
 	private void CombinedCheckBoxActionPerformed(ActionEvent evt) {
 		RangeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {
-				RangeType.ALL.getKey(), RangeType.AM.getKey(),
-				RangeType.NZ.getKey(), RangeType.NUM1.getKey(),
-				RangeType.NUM2.getKey(), RangeType.NUM3.getKey(),
-				RangeType.NUM4.getKey() }));
+				RangeType.NONE.getKey(), RangeType.ALL.getKey(),
+				RangeType.AM.getKey(), RangeType.NZ.getKey(),
+				RangeType.NUM1.getKey(), RangeType.NUM2.getKey(),
+				RangeType.NUM3.getKey(), RangeType.NUM4.getKey() }));
 		doFilter();
 	}
 

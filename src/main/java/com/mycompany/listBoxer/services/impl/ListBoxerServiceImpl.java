@@ -43,7 +43,7 @@ public class ListBoxerServiceImpl implements ListBoxerService {
 	public String getAll() {
 		StringBuffer buffer = new StringBuffer();
 		for (String item : content) {
-			buffer.append(String.format("%s \n", item));
+			buffer.append(String.format("%s\n", item));
 		}
 		return buffer.toString();
 	}
