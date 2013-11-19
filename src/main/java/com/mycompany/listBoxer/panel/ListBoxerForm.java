@@ -9,6 +9,8 @@ package com.mycompany.listBoxer.panel;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,6 +27,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -206,6 +209,8 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		FileMenuItem.setText("File");
 
 		OpenItem.setText("Open");
+		OpenItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+				InputEvent.CTRL_MASK));
 		OpenItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -255,6 +260,8 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		FileMenuItem.add(OpenItem);
 
 		SaveItem.setText("Save as");
+		SaveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				InputEvent.CTRL_MASK));
 		SaveItem.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("resource")
@@ -284,6 +291,8 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		FileMenuItem.add(SaveItem);
 
 		ExitItem.setText("Exit");
+		ExitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+				InputEvent.CTRL_MASK));
 		ExitItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -298,16 +307,24 @@ public class ListBoxerForm extends javax.swing.JFrame {
 		EditMenuItem.setText("Edit");
 
 		UndoItem.setText("Undo");
+		UndoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+				InputEvent.CTRL_MASK));
 		EditMenuItem.add(UndoItem);
 		EditMenuItem.add(jSeparator2);
 
 		CutItem.setText("Cut");
+		CutItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
+				InputEvent.CTRL_MASK));
 		EditMenuItem.add(CutItem);
 
 		CopyItem.setText("Copy");
+		CopyItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+				InputEvent.CTRL_MASK));
 		EditMenuItem.add(CopyItem);
 
 		PasteItem.setText("Paste");
+		PasteItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+				InputEvent.CTRL_MASK));
 		EditMenuItem.add(PasteItem);
 
 		MainMenu.add(EditMenuItem);
