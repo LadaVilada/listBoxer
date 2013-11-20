@@ -3,13 +3,17 @@ package com.mycompany.listBoxer;
 /**
  * Class RangeUtils should :
  * 1.Check if the given String value is in range according to given criteria
- * 
+ *   *criteria can be null
+ *   *value can be empty
+ *   
  * (-isInRange(String value, SelectionCriteria criteria))
  * 
  * 2.Check if the given int value falls within the range
  * 
  * (-Boolean intervallContains(int low, int high, int n))
  * 
+ * 
+ * keep to method's naming convention (what method test/what parameters pass/expect as a result)
  * @author vbobina 
  */
 import org.junit.Assert;

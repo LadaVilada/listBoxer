@@ -25,11 +25,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -367,75 +370,76 @@ public class ListBoxerForm extends javax.swing.JFrame {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												Alignment.LEADING)
 												.addGroup(
 														layout.createSequentialGroup()
 																.addContainerGap()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				Alignment.LEADING)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
 																										jLabel1)
-																								.addGap(22,
-																										22,
-																										22)
+																								.addGap(22)
 																								.addComponent(
 																										RangeComboBox,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.PREFERRED_SIZE))
+																										GroupLayout.PREFERRED_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.PREFERRED_SIZE))
 																				.addComponent(
 																						AlphabeticCheckBox)
 																				.addComponent(
 																						NumericCheckBox)
 																				.addComponent(
-																						CombinedCheckBox)
-																				.addComponent(
 																						jLabel6)
 																				.addComponent(
+																						CombinedCheckBox)
+																				.addComponent(
 																						jLabel7)))
-												.addComponent(
-														AscendingRadioButton)
-												.addComponent(
-														DescendingRadioButton,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														136,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-										22, Short.MAX_VALUE)
+												.addGroup(
+														layout.createParallelGroup(
+																Alignment.TRAILING,
+																false)
+																.addComponent(
+																		DescendingRadioButton,
+																		Alignment.LEADING,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.addComponent(
+																		AscendingRadioButton,
+																		Alignment.LEADING,
+																		GroupLayout.DEFAULT_SIZE,
+																		151,
+																		Short.MAX_VALUE)))
+								.addGap(24)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												Alignment.TRAILING)
 												.addComponent(
 														jTextArea,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														198,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.DEFAULT_SIZE,
+														217, Short.MAX_VALUE)
 												.addComponent(
 														jTextInput,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														198,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addGap(44, 44, 44)
+														GroupLayout.DEFAULT_SIZE,
+														217, Short.MAX_VALUE))
+								.addGap(25)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												Alignment.TRAILING)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				Alignment.TRAILING)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
@@ -445,147 +449,138 @@ public class ListBoxerForm extends javax.swing.JFrame {
 																										Short.MAX_VALUE))
 																				.addGroup(
 																						layout.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING,
+																								Alignment.LEADING,
 																								false)
 																								.addComponent(
 																										AddButton,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
 																										101,
 																										Short.MAX_VALUE)
 																								.addComponent(
 																										ClearButton,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
-																										javax.swing.GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
 																										Short.MAX_VALUE)))
-																.addGap(21, 21,
-																		21))
+																.addGap(21))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING)
+																				Alignment.TRAILING)
 																				.addComponent(
 																						TotalLabel)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
 																										jLabel2)
-																								.addGap(18,
-																										18,
-																										18)
+																								.addGap(18)
 																								.addComponent(
 																										RecordsLabel)))
 																.addContainerGap(
-																		26,
+																		47,
 																		Short.MAX_VALUE)))));
 		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
-								.addGap(19, 19, 19)
+								.addGap(19)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												Alignment.BASELINE)
 												.addComponent(
 														RangeComboBox,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(jLabel1)
 												.addComponent(
 														jTextInput,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														31,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														AddButton,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
+														GroupLayout.PREFERRED_SIZE,
 														31,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addGap(32, 32, 32)
+														GroupLayout.PREFERRED_SIZE))
+								.addGap(32)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												Alignment.LEADING)
 												.addGroup(
 														layout.createSequentialGroup()
 																.addComponent(
 																		ClearButton,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		34,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
+																		ComponentPlacement.RELATED,
+																		195,
 																		Short.MAX_VALUE)
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				Alignment.BASELINE)
 																				.addComponent(
 																						jLabel2)
 																				.addComponent(
 																						RecordsLabel))
-																.addGap(18, 18,
-																		18)
+																.addGap(18)
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
+																				Alignment.BASELINE)
 																				.addComponent(
 																						jLabel3)
 																				.addComponent(
 																						TotalLabel))
-																.addGap(38, 38,
-																		38))
+																.addGap(38))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.TRAILING,
+																				Alignment.TRAILING,
 																				false)
 																				.addComponent(
 																						jTextArea,
-																						javax.swing.GroupLayout.Alignment.LEADING)
+																						Alignment.LEADING)
 																				.addGroup(
+																						Alignment.LEADING,
 																						layout.createSequentialGroup()
-																								.addGap(17,
-																										17,
-																										17)
+																								.addGap(17)
 																								.addComponent(
 																										jLabel7)
-																								.addGap(1,
-																										1,
-																										1)
+																								.addGap(1)
 																								.addComponent(
 																										AscendingRadioButton,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										23,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																										GroupLayout.PREFERRED_SIZE,
+																										34,
+																										GroupLayout.PREFERRED_SIZE)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										ComponentPlacement.RELATED)
 																								.addComponent(
 																										DescendingRadioButton,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
-																										25,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(69,
-																										69,
-																										69)
+																										GroupLayout.PREFERRED_SIZE,
+																										31,
+																										GroupLayout.PREFERRED_SIZE)
+																								.addGap(95)
 																								.addComponent(
 																										jLabel6)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																										ComponentPlacement.UNRELATED)
 																								.addComponent(
 																										AlphabeticCheckBox)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										ComponentPlacement.RELATED)
 																								.addComponent(
 																										NumericCheckBox)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																										ComponentPlacement.RELATED)
 																								.addComponent(
 																										CombinedCheckBox)))
 																.addGap(0,
-																		22,
+																		25,
 																		Short.MAX_VALUE)))));
+		getContentPane().setLayout(layout);
 
 		pack();
 	}

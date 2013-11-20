@@ -10,12 +10,18 @@ import com.mycompany.listBoxer.dto.SelectionCriteria;
 import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
 
-/* In this test we will create reaction on user behavior. 
- * If he choose:
+/**
  * 
- *  descending sort
- * digits type only
- * range [0-100]
+ * * class ListBoxerServiceImpl should:
+ * 
+ * get list of String according to selection criteria (user select type of
+ * ascending, range and symbols)
+ * 
+ * -List<String> getByCriteria(SelectionCriteria selCriteria)
+ * 
+ * In this test we will create reaction on user behavior.
+ * 
+ * If he choose: descending sort digits type only range [0-100]
  * 
  * 
  * @author vbobina
@@ -28,7 +34,7 @@ public class FilterNumericMockitoTest {
 			"bear", "101", "zieben", "" };
 
 	@Test
-	public void getByRange_RangeInNUM1_Success() {
+	public void getByCriteria_RangeInNUM1_Success() {
 		/*
 		 * 1. create SelectionCriteria and fill it
 		 * 

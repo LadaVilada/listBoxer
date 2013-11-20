@@ -11,6 +11,12 @@ import com.mycompany.listBoxer.services.ListBoxerService;
 import com.mycompany.listBoxer.services.impl.ListBoxerServiceImpl;
 
 /**
+ * class ListBoxerServiceImpl should:
+ * 
+ * get list of String according to selection criteria (user select type of
+ * ascending, range and symbols)
+ * 
+ * -List<String> getByCriteria(SelectionCriteria selCriteria)
  * 
  * @author vbobina
  * 

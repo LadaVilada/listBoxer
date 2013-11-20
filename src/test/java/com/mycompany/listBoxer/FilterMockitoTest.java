@@ -33,7 +33,7 @@ public class FilterMockitoTest {
 			"nike", "moody", "zieben" };
 
 	@Test
-	public void getByRange_RangeInA_M_Success() {
+	public void getByCriteria_RangeInA_M_Success() {
 		/*
 		 * 1. create SelectionCriteria and fill it
 		 * 
